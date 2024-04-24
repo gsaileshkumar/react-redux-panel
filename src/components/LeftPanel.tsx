@@ -23,11 +23,8 @@ const LeftPanel = () => {
   );
   const dispatch = useAppDispatch();
 
-  return (
-    <div className="flex flex-col w-[240px] max-w-[240px] p-[20px] bg-[#111]">
-      <div className="text-[#44d62c] uppercase text-xl leading-6 font-normal mb-5 max-h-[24px]">
-        Profile List
-      </div>
+  const ProfilesList = () => {
+    return (
       <div className="w-[200px] h-[220px] flex-col max-h-[220px] border border-solid border-[#5d5d5d] overflow-y-auto overflow-x-hidden">
         {profiles.map((profile) => {
           const isSelected = profile.id === selectedProfile.id;
@@ -69,6 +66,11 @@ const LeftPanel = () => {
           );
         })}
       </div>
+    );
+  };
+
+  const Toolbox = () => {
+    return (
       <div className="flex border border-solid border-[#5d5d5d] bg-[#222]">
         <button
           className="disabled:cursor-not-allowed h-[28px] w-[28px]"
@@ -107,6 +109,16 @@ const LeftPanel = () => {
           <IconAdd />
         </button>
       </div>
+    );
+  };
+
+  return (
+    <div className="flex flex-col w-[240px] max-w-[240px] p-[20px] bg-[#111]">
+      <div className="text-[#44d62c] uppercase text-xl leading-6 font-normal mb-5 max-h-[24px]">
+        Profile List
+      </div>
+      <ProfilesList />
+      <Toolbox />
     </div>
   );
 };
