@@ -1,20 +1,11 @@
-import IconAdd from "../assets/IconAdd";
-import IconArrowDown from "../assets/IconArrowDown";
-import IconArrowUp from "../assets/IconArrowUp";
-import IconDelete from "../assets/IconDelete";
-import IconEdit from "../assets/IconEdit";
 import IconProfileCustom from "../assets/IconProfileCustom";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import {
-  addProfile,
   cancelEditing,
-  defaultProfiles,
-  deleteProfile,
-  moveProfile,
   renameProfile,
   selectProfile,
-  startEditing,
 } from "../profiles/profilesSlice";
+import Toolbox from "./Toolbox";
 
 const LeftPanel = () => {
   const profiles = useAppSelector((state) => state.profiles.profiles);
@@ -23,8 +14,11 @@ const LeftPanel = () => {
   );
   const dispatch = useAppDispatch();
 
-  const ProfilesList = () => {
-    return (
+  return (
+    <div className="flex flex-col w-[240px] max-w-[240px] p-[20px] bg-[#111]">
+      <div className="text-[#44d62c] uppercase text-xl leading-6 font-normal mb-5 max-h-[24px]">
+        Profile List
+      </div>
       <div className="w-[200px] h-[220px] flex-col max-h-[220px] border border-solid border-[#5d5d5d] overflow-y-auto overflow-x-hidden">
         {profiles.map((profile) => {
           const isSelected = profile.id === selectedProfile.id;
@@ -66,58 +60,6 @@ const LeftPanel = () => {
           );
         })}
       </div>
-    );
-  };
-
-  const Toolbox = () => {
-    return (
-      <div className="flex border border-solid border-[#5d5d5d] bg-[#222]">
-        <button
-          className="disabled:cursor-not-allowed h-[28px] w-[28px]"
-          onClick={() => dispatch(moveProfile("up"))}
-          disabled={selectedProfile.index === 0}
-        >
-          <IconArrowUp disabled={selectedProfile.index === 0} />
-        </button>
-        <button
-          className="disabled:cursor-not-allowed h-[28px] w-[28px]"
-          onClick={() => dispatch(moveProfile("down"))}
-          disabled={selectedProfile.index === profiles.length - 1}
-        >
-          <IconArrowDown
-            disabled={selectedProfile.index === profiles.length - 1}
-          />
-        </button>
-        <button
-          className="disabled:cursor-not-allowed h-[28px] w-[28px] ml-auto"
-          onClick={() => dispatch(deleteProfile())}
-          disabled={defaultProfiles.includes(selectedProfile.id)}
-        >
-          <IconDelete disabled={defaultProfiles.includes(selectedProfile.id)} />
-        </button>
-        <button
-          className="disabled:cursor-not-allowed h-[28px] w-[28px]"
-          onClick={() => dispatch(startEditing())}
-          disabled={defaultProfiles.includes(selectedProfile.id)}
-        >
-          <IconEdit disabled={defaultProfiles.includes(selectedProfile.id)} />
-        </button>
-        <button
-          className="disabled:cursor-not-allowed h-[28px] w-[28px]"
-          onClick={() => dispatch(addProfile())}
-        >
-          <IconAdd />
-        </button>
-      </div>
-    );
-  };
-
-  return (
-    <div className="flex flex-col w-[240px] max-w-[240px] p-[20px] bg-[#111]">
-      <div className="text-[#44d62c] uppercase text-xl leading-6 font-normal mb-5 max-h-[24px]">
-        Profile List
-      </div>
-      <ProfilesList />
       <Toolbox />
     </div>
   );
