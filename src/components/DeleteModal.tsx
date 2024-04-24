@@ -35,7 +35,7 @@ const DeleteModal = ({
       >
         <div className="flex flex-col justify-between items-center pb-2 ">
           <h5 className="font-medium text-[#c8323c]">DELETE EQ</h5>
-          <p className="pt-4 mb-5">{content}</p>
+          <p className="pt-4 mb-5 truncate text-ellipsis w-full">{content}</p>
           <button
             className="rounded bg-[#c8323c] p-1 text-sm"
             onClick={onConfirm}
